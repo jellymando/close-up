@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "283793352349",
+    "project_id": "vernal-reality-385402",
+    "storage_bucket": "vernal-reality-385402.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:283793352349:android:219dc3fb25ee0bab5a1674",
+        "android_client_info": {
+          "package_name": "com.example.close_up"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "283793352349-a75d8sibdoi6coe1mug5k47f5a61ih5i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.close_up",
+            "certificate_hash": "f3738e0b4ece7be962ae92744243d842bd1ccb13"
+          }
+        },
+        {
+          "client_id": "283793352349-r9j94ad9d4nf7p547so9na1ln45cquig.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBO8NDfQmQXHqToExfMaNcfqNwhBtXZOC0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "283793352349-r9j94ad9d4nf7p547so9na1ln45cquig.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
