@@ -20,14 +20,32 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('클로즈업'),
-      ),
       body: Center(
         child: ElevatedButton(
           onPressed: _handleSignOut,
           child: const Text('로그아웃'),
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        items: [
+          BottomNavigationBarItem(
+              label: '홈',
+              icon: Icon(Icons.home, size: 25, color: Colors.cyan.shade200)),
+          BottomNavigationBarItem(
+              label: '문장',
+              icon: Icon(Icons.book, size: 22, color: Colors.cyan.shade200)),
+          BottomNavigationBarItem(
+              label: '한줄평',
+              icon: Icon(Icons.featured_play_list,
+                  size: 22, color: Colors.cyan.shade200)),
+          BottomNavigationBarItem(
+              label: '마이페이지',
+              icon: Icon(Icons.account_circle,
+                  size: 25, color: Colors.cyan.shade200))
+        ],
       ),
     );
   }
