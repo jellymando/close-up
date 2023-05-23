@@ -23,34 +23,30 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            Colors.cyan.shade300,
-            Colors.blue.shade200,
-            Colors.deepPurple.shade100
-          ],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-        ),
-      ),
+      color: Colors.white,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset("assets/images/close_up.png", width: 250),
-          SizedBox(height: 100),
+          Image.asset("assets/images/close_up_gradient.png", width: 180),
+          SizedBox(height: 150),
           SizedBox(
-            width: 230,
+            width: 220,
+            height: 40,
             child: ElevatedButton(
                 onPressed: _handleSignIn,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    side: BorderSide(color: Colors.black26, width: 1),
+                  ),
+                  elevation: 0,
                 ),
                 child:
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   Image.asset("assets/images/google_logo.png",
-                      width: 24, height: 24),
-                  SizedBox(width: 24),
+                      width: 20, height: 20),
+                  SizedBox(width: 20),
                   Text('Google로 시작하기', style: TextStyle(color: Colors.black87)),
                 ])),
           ),
