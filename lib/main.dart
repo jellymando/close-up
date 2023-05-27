@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-import 'screens/home_screen.dart';
-import 'screens/login_screen.dart';
+import 'model/account.dart';
+import 'screens/home.dart';
+import 'screens/login.dart';
 
 GoogleSignIn _googleSignIn = GoogleSignIn(
     // clientId: '',
@@ -24,20 +26,27 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  GoogleSignInAccount? _account;
-  bool _isLoggedIn = false; // has granted permissions?
+  Account? _account;
+  bool _isLoggedIn = false;
 
   @override
   void initState() {
     super.initState();
 
+    Firebase.initializeApp();
+
     _googleSignIn.onCurrentUserChanged
-        .listen((GoogleSignInAccount? account) async {
-      // In mobile, being authenticated means being authorized...
-      print(account);
-      bool isAuthorized = account != null;
+        .listen((GoogleSignInAccount? googleAccount) async {
+      print(googleAccount);
+      bool isAuthorized = googleAccount != null;
+
       setState(() {
-        _account = account;
+        _account = Account(
+          id: googleAccount?.id ?? '',
+          email: googleAccount?.email ?? '',
+          nickname: googleAccount?.displayName ?? '',
+          profileImageUrl: googleAccount?.photoUrl ?? '',
+        );
         _isLoggedIn = isAuthorized;
       });
     });
@@ -47,7 +56,7 @@ class _AppState extends State<App> {
 
   Widget build(BuildContext context) {
     return _isLoggedIn
-        ? HomePage(googleSignIn: _googleSignIn, account: _account)
+        ? HomePage(googleSignIn: _googleSignIn, account: _account!)
         : LoginPage(googleSignIn: _googleSignIn);
   }
 }
