@@ -1,20 +1,23 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:provider/provider.dart';
 
-import 'model/account.dart';
-import 'screens/home.dart';
-import 'screens/login.dart';
-
-GoogleSignIn _googleSignIn = GoogleSignIn(
-    // clientId: '',
-    );
+import 'package:close_up/provider/provider.dart';
+import 'package:close_up/utils/googleSignIn.dart';
+import 'package:close_up/model/account.dart';
+import 'package:close_up/pages/home.dart';
+import 'package:close_up/pages/login.dart';
 
 void main() {
   runApp(
-    const MaterialApp(
-      home: App(),
-    ),
+    ChangeNotifierProvider(
+        create: (_) => MyState(),
+        child: MaterialApp(
+          home: App(),
+        )),
   );
 }
 
@@ -26,7 +29,8 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  Account? _account;
+  final MyGoogleSignIn _myGoogleSignIn = MyGoogleSignIn.instance;
+  StreamSubscription<GoogleSignInAccount?>? _userChangedSubscription;
   bool _isLoggedIn = false;
 
   @override
@@ -35,28 +39,36 @@ class _AppState extends State<App> {
 
     Firebase.initializeApp();
 
-    _googleSignIn.onCurrentUserChanged
-        .listen((GoogleSignInAccount? googleAccount) async {
-      print(googleAccount);
-      bool isAuthorized = googleAccount != null;
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      final myState = Provider.of<MyState>(context, listen: false);
 
-      setState(() {
-        _account = Account(
+      _userChangedSubscription = _myGoogleSignIn.onCurrentUserChanged
+          .listen((GoogleSignInAccount? googleAccount) async {
+        print('googleAccount');
+        print(googleAccount);
+        bool isAuthorized = googleAccount != null;
+
+        myState.setAccount(Account(
           id: googleAccount?.id ?? '',
           email: googleAccount?.email ?? '',
           nickname: googleAccount?.displayName ?? '',
           profileImageUrl: googleAccount?.photoUrl ?? '',
-        );
-        _isLoggedIn = isAuthorized;
+        ));
+        setState(() {
+          _isLoggedIn = isAuthorized;
+        });
       });
     });
+  }
 
-    _googleSignIn.signInSilently();
+  @override
+  void dispose() {
+    _userChangedSubscription?.cancel();
+
+    super.dispose();
   }
 
   Widget build(BuildContext context) {
-    return _isLoggedIn
-        ? HomePage(googleSignIn: _googleSignIn, account: _account!)
-        : LoginPage(googleSignIn: _googleSignIn);
+    return _isLoggedIn ? HomePage() : LoginPage();
   }
 }

@@ -1,24 +1,16 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+
+import 'package:close_up/utils/googleSignIn.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key, required this.googleSignIn}) : super(key: key);
-
-  final GoogleSignIn googleSignIn;
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
-  Future<void> _handleSignIn() async {
-    try {
-      await widget.googleSignIn.signIn();
-    } catch (error) {
-      print(error);
-    }
-  }
+  final MyGoogleSignIn _myGoogleSignIn = MyGoogleSignIn.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +25,7 @@ class _LoginPageState extends State<LoginPage> {
             width: 220,
             height: 40,
             child: ElevatedButton(
-                onPressed: _handleSignIn,
+                onPressed: _myGoogleSignIn.signIn,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
