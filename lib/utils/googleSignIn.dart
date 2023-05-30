@@ -20,7 +20,9 @@ class MyGoogleSignIn {
   Future<void> signIn() async {
     try {
       await _googleSignIn.signIn();
+      print('로그인 성공');
     } catch (error) {
+      print('로그인 실패');
       print(error);
     }
   }

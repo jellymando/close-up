@@ -19,7 +19,8 @@ class _SentencesPageState extends State<SentencesPage> {
       child: StreamBuilder<QuerySnapshot>(
           stream:
               FirebaseFirestore.instance.collection('sentences').snapshots(),
-          builder: (context, snapshot) {
+          builder:
+              (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
             }
@@ -28,19 +29,19 @@ class _SentencesPageState extends State<SentencesPage> {
               return CircularProgressIndicator();
             }
 
-            final documents = snapshot.data?.docs;
-
-            return Expanded(
-                child: ListView.builder(
-              itemCount: documents?.length,
-              itemBuilder: (BuildContext context, int index) {
-                final document = documents?[index].data();
-                final content = (document as Map<String, dynamic>)['content'];
-                return ListTile(
-                  title: Text(content),
+            return ListView(
+              children: snapshot.data!.docs.map((DocumentSnapshot document) {
+                Map<String, dynamic> data =
+                    document.data() as Map<String, dynamic>;
+                return Card(
+                  color: Colors.white70,
+                  child: ListTile(
+                    title: Text(data['content']),
+                    subtitle: Text(data['bookName']),
+                  ),
                 );
-              },
-            ));
+              }).toList(),
+            );
           }),
     );
   }

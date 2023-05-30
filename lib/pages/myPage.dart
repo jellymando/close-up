@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'package:close_up/main.dart';
 import 'package:close_up/layout/layout.dart';
 import 'package:close_up/utils/googleSignIn.dart';
-import 'package:close_up/pages/login.dart';
 
 class MyPage extends StatefulWidget {
   const MyPage({Key? key}) : super(key: key);
@@ -19,7 +19,7 @@ class _MyPageState extends State<MyPage> {
     Future<void> handleSignOut() async {
       void onSuccess() {
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => LoginPage()));
+            context, MaterialPageRoute(builder: (context) => App()));
       }
 
       await _myGoogleSignIn.signOut(onSuccess);

@@ -32,7 +32,7 @@ class MainLayout extends StatelessWidget {
     }
 
     return Scaffold(
-      body: child,
+      body: Padding(padding: EdgeInsets.all(16), child: child),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         showSelectedLabels: false,
@@ -42,7 +42,7 @@ class MainLayout extends StatelessWidget {
               label: '홈',
               icon: Icon(Icons.home, size: 25, color: Colors.cyan.shade200)),
           BottomNavigationBarItem(
-              label: '문장',
+              label: '문장들',
               icon: Icon(Icons.book, size: 22, color: Colors.cyan.shade200)),
           BottomNavigationBarItem(
               label: '한줄평',
