@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:close_up/pages/home.dart';
 import 'package:close_up/pages/sentences.dart';
+import 'package:close_up/pages/reviews.dart';
 import 'package:close_up/pages/mypage.dart';
 
 class MainLayout extends StatelessWidget {
@@ -22,7 +23,7 @@ class MainLayout extends StatelessWidget {
           break;
         case 2:
           Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => HomePage()));
+              context, MaterialPageRoute(builder: (context) => ReviewPage()));
           break;
         case 3:
           Navigator.pushReplacement(
@@ -45,7 +46,7 @@ class MainLayout extends StatelessWidget {
               label: '문장들',
               icon: Icon(Icons.book, size: 22, color: Colors.cyan.shade200)),
           BottomNavigationBarItem(
-              label: '한줄평',
+              label: '리뷰',
               icon: Icon(Icons.featured_play_list,
                   size: 22, color: Colors.cyan.shade200)),
           BottomNavigationBarItem(

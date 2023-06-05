@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
 
 import 'package:close_up/provider/provider.dart';
-import 'package:close_up/layout/layout.dart';
+import 'package:close_up/layout/main.dart';
 import 'package:close_up/model/account.dart';
 
 class HomePage extends StatefulWidget {
@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       final myState = Provider.of<MyState>(context, listen: false);
 
       _checkAccount(myState.account);

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:close_up/main.dart';
-import 'package:close_up/layout/layout.dart';
+import 'package:close_up/layout/main.dart';
 import 'package:close_up/utils/googleSignIn.dart';
 
 class MyPage extends StatefulWidget {

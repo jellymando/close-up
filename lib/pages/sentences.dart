@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'package:close_up/layout/layout.dart';
+import 'package:close_up/layout/main.dart';
 
 class SentencesPage extends StatefulWidget {
   const SentencesPage({Key? key}) : super(key: key);
@@ -11,8 +11,6 @@ class SentencesPage extends StatefulWidget {
 }
 
 class _SentencesPageState extends State<SentencesPage> {
-  List sentences = [];
-
   @override
   Widget build(BuildContext context) {
     return MainLayout(
@@ -26,7 +24,7 @@ class _SentencesPageState extends State<SentencesPage> {
             }
 
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return CircularProgressIndicator();
+              return Center(child: CircularProgressIndicator());
             }
 
             return ListView(
@@ -35,10 +33,12 @@ class _SentencesPageState extends State<SentencesPage> {
                     document.data() as Map<String, dynamic>;
                 return Card(
                   color: Colors.white70,
-                  child: ListTile(
-                    title: Text(data['content']),
-                    subtitle: Text(data['bookName']),
-                  ),
+                  child: Padding(
+                      padding: EdgeInsets.all(6),
+                      child: ListTile(
+                        title: Text(data['content']),
+                        subtitle: Text(data['bookName']),
+                      )),
                 );
               }).toList(),
             );
