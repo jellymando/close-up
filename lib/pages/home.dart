@@ -65,8 +65,12 @@ class _HomePageState extends State<HomePage> {
       'nickname': account.nickname,
       'profileImageUrl': account.profileImageUrl,
     };
-    await FirebaseFirestore.instance.collection("users").add(accountData);
-    _showAlertDialog(context, account.nickname);
+    try {
+      await FirebaseFirestore.instance.collection("users").add(accountData);
+      _showAlertDialog(context, account.nickname);
+    } catch (error) {
+      print(error);
+    }
   }
 
   Future<void> _checkAccount(Account account) async {
