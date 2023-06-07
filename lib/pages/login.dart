@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:close_up/utils/googleSignIn.dart';
+import 'package:close_up/widgets/button.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -24,16 +25,10 @@ class _LoginPageState extends State<LoginPage> {
           SizedBox(
             width: 220,
             height: 40,
-            child: ElevatedButton(
+            child: Button(
                 onPressed: _myGoogleSignIn.signIn,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    side: BorderSide(color: Colors.black12, width: 1),
-                  ),
-                  elevation: 0,
-                ),
+                isFill: false,
+                type: 'secondary',
                 child:
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   Image.asset("assets/images/google_logo.png",

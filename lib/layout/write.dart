@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:close_up/layout/main.dart';
+import 'package:close_up/widgets/button.dart';
 
 class WriteLayout extends StatelessWidget {
   final List<Widget> children;
@@ -22,13 +23,17 @@ class WriteLayout extends StatelessWidget {
           children: [
             ...children,
             SizedBox(height: 30.0),
-            ElevatedButton(
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  onSubmit();
-                }
-              },
-              child: Text('등록하기'),
+            Container(
+              width: double.infinity,
+              height: 44.0,
+              child: Button(
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    onSubmit();
+                  }
+                },
+                child: Text('등록하기'),
+              ),
             )
           ],
         ),

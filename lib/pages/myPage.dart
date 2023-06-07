@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'package:close_up/utils/googleSignIn.dart';
 import 'package:close_up/main.dart';
 import 'package:close_up/layout/main.dart';
-import 'package:close_up/utils/googleSignIn.dart';
+import 'package:close_up/widgets/button.dart';
 
 class MyPage extends StatefulWidget {
   const MyPage({Key? key}) : super(key: key);
@@ -27,7 +28,7 @@ class _MyPageState extends State<MyPage> {
 
     return MainLayout(
         child: Center(
-      child: ElevatedButton(
+      child: Button(
         onPressed: handleSignOut,
         child: const Text('로그아웃'),
       ),
