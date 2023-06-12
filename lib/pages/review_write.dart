@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'package:close_up/layout/write.dart';
+import 'package:close_up/layout/main.dart';
+import 'package:close_up/widgets/form.dart';
 import 'package:close_up/widgets/button.dart';
 import 'package:close_up/widgets/rating.dart';
 import 'package:close_up/pages/reviews.dart';
@@ -65,71 +66,70 @@ class _ReviewWritePageState extends State<ReviewWritePage> {
 
   @override
   Widget build(BuildContext context) {
-    return WriteLayout(
-      onSubmit: _submitForm,
-      children: [
-        Text('책 검색'),
-        Row(
-          children: [
-            Expanded(
-              child: TextFormField(
-                validator: (String? value) {
-                  if (value == null || value.isEmpty) {
-                    return '책을 검색해주세요.';
-                  }
-                  return null;
-                },
-                onChanged: (String? value) {
-                  _bookName = value;
-                },
+    return MainLayout(
+      child: FormContainer(
+        submitText: '등록하기',
+        onSubmit: _submitForm,
+        children: [
+          Text('책 검색'),
+          Row(
+            children: [
+              Expanded(
+                child: TextFormField(
+                  validator: (String? value) {
+                    if (value == null || value.isEmpty) {
+                      return '책을 검색해주세요.';
+                    }
+                    return null;
+                  },
+                  onChanged: (String? value) {
+                    _bookName = value;
+                  },
+                ),
               ),
-            ),
-            SizedBox(width: 16.0),
-            Button(
-                onPressed: () {
-                  if (_bookName != null) {
-                    _showBookSearchAlert(_bookName);
-                  }
-                },
-                child: Text('검색'),
-                isFill: false),
-          ],
-        ),
-        SizedBox(height: 16.0),
-        Text('제목'),
-        TextFormField(
-          validator: (String? value) {
-            if (value == null || value.isEmpty) {
-              return '제목을 입력해주세요.';
-            }
-            return null;
-          },
-          onChanged: (String? value) {
-            _title = value;
-          },
-        ),
-        SizedBox(height: 16.0),
-        Text('별점'),
-        SizedBox(height: 10.0),
-        Rating(
-          rating: _rating,
-          updateRating: _updateRating,
-        ),
-        SizedBox(height: 16.0),
-        Text('내용'),
-        TextFormField(
-          maxLines: 4,
-          validator: (String? value) {
-            if (value == null || value.isEmpty) {
-              return '내용을 입력해주세요.';
-            }
-            return null;
-          },
-          onChanged: (String? value) {
-            _content = value;
-          },
-        ),
-      ],
+              SizedBox(width: 16.0),
+              Button(
+                  onPressed: _showBookSearchAlert,
+                  child: Text('검색'),
+                  isFill: false),
+            ],
+          ),
+          SizedBox(height: 16.0),
+          Text('제목'),
+          TextFormField(
+            validator: (String? value) {
+              if (value == null || value.isEmpty) {
+                return '제목을 입력해주세요.';
+              }
+              return null;
+            },
+            onChanged: (String? value) {
+              _title = value;
+            },
+          ),
+          SizedBox(height: 16.0),
+          Text('별점'),
+          SizedBox(height: 10.0),
+          Rating(
+            rating: _rating,
+            updateRating: _updateRating,
+          ),
+          SizedBox(height: 16.0),
+          Text('내용'),
+          TextFormField(
+            maxLines: 4,
+            validator: (String? value) {
+              if (value == null || value.isEmpty) {
+                return '내용을 입력해주세요.';
+              }
+              return null;
+            },
+            onChanged: (String? value) {
+              _content = value;
+            },
+          ),
+        ],
+      ),
     );
   }
 }
