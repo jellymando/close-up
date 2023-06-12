@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
     return querySnapshot.docs.isNotEmpty;
   }
 
-  void _showAlertDialog(BuildContext context, String? nickname) {
+  void _showSignUpDialog(String? nickname) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -67,7 +67,8 @@ class _HomePageState extends State<HomePage> {
     };
     try {
       await FirebaseFirestore.instance.collection("users").add(accountData);
-      _showAlertDialog(context, account.nickname);
+      if (!context.mounted) return;
+      _showSignUpDialog(account.nickname);
     } catch (error) {
       print(error);
     }
