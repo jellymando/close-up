@@ -33,7 +33,7 @@ class MainLayout extends StatelessWidget {
     }
 
     return Scaffold(
-      body: Padding(padding: EdgeInsets.all(16), child: child),
+      body: Padding(padding: EdgeInsets.fromLTRB(16, 36, 16, 16), child: child),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         showSelectedLabels: false,

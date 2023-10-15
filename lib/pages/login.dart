@@ -20,8 +20,8 @@ class _LoginPageState extends State<LoginPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset("assets/images/close_up_gradient.png", width: 180),
-          SizedBox(height: 150),
+          Image.asset("assets/images/close_up.png", width: 180),
+          SizedBox(height: 100),
           SizedBox(
             width: 220,
             height: 40,
